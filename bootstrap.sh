@@ -36,7 +36,7 @@ echo ""
 echo -e "${BOLD}Step 1: Installing GitHub CLI...${NC}"
 
 if command -v gh &>/dev/null; then
-    echo -e "${GREEN}✓ gh already installed$(gh --version | head -1)${NC}"
+    echo -e "${GREEN}✓ gh already installed — $(gh --version | head -1)${NC}"
 else
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
         sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
