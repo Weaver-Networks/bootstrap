@@ -4,7 +4,10 @@
 # This script is the public front door to the HomeStation install process.
 # It installs GitHub CLI, authenticates, then hands off to the private install.sh
 #
-# Usage: curl -fsSL https://raw.githubusercontent.com/Weaver-Networks/bootstrap/main/bootstrap.sh | bash
+# Usage (download, read it, then run):
+#   curl -fsSLO https://raw.githubusercontent.com/Weaver-Networks/bootstrap/main/bootstrap.sh
+#   less bootstrap.sh
+#   bash bootstrap.sh
 
 set -e
 
@@ -26,9 +29,9 @@ echo "  4. Run the full install process"
 echo ""
 echo -e "${YELLOW}You will need:${NC}"
 echo "  • A GitHub account that has been added as a collaborator"
-echo "  • Signal contact with Sam for the mesh handshake step"
+echo "  • An invitation from the Weaver Networks team"
 echo ""
-read -p "Press Enter to continue or Ctrl+C to cancel..."
+read -p "Press Enter to continue or Ctrl+C to cancel..." </dev/tty
 
 # ── Step 1: Install gh ──────────────────────────────────────────────────────
 
@@ -36,7 +39,7 @@ echo ""
 echo -e "${BOLD}Step 1: Installing GitHub CLI...${NC}"
 
 if command -v gh &>/dev/null; then
-    echo -e "${GREEN}✓ gh already installed$(gh --version | head -1)${NC}"
+    echo -e "${GREEN}✓ gh already installed ($(gh --version | head -1))${NC}"
 else
     curl -fsSL https://cli.github.com/packages/githubcli-archive-keyring.gpg | \
         sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
@@ -58,7 +61,7 @@ else
     echo "Visit https://github.com/login/device and enter the code shown below."
     echo "You can do this from any browser on any device."
     echo ""
-    gh auth login --hostname github.com --git-protocol https
+    gh auth login --hostname github.com --git-protocol https </dev/tty
     echo -e "${GREEN}✓ GitHub authentication complete${NC}"
 fi
 
